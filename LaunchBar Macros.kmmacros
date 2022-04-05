@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>569856847.63451505</real>
+		<key>CustomIconData</key>
+		<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>ActionName</key>
+						<string>com.stairways.keyboardmaestro.editor</string>
+						<key>ActionUID</key>
+						<integer>52678</integer>
+						<key>MacroActionType</key>
+						<string>SetVariableToText</string>
+						<key>Text</key>
+						<string>%ApplicationBundleID%1%</string>
+						<key>Variable</key>
+						<string>AppName</string>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>52682</integer>
+						<key>DisplayKind</key>
+						<string>Variable</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>ExecuteJavaScriptForAutomation</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>var km=Application("Keyboard Maestro");
+var kme=Application("Keyboard Maestro Engine");
+km.includeStandardAdditions = true;
+kme.includeStandardAdditions = true;
+var AppName=kme.getvariable("AppName");
+//var LBAll=JSON.parse(kme.getvariable("LBAll"));
+var LBAll=JSON.parse(kme.getvariable("LBAll"));
+//var AllApp=JSON.parse(kme.getvariable("AllApp"));
+
+var macrosGroups=km.macroGroups.whose({availableApplicationXml:{ _contains: AppName }})();
+var macroGroup;
+//var macrosGroups=km.macroGroups.whose({_or:[{availableApplicationXml:{ _contains: AppName }},{availableApplicationXml:{ _contains:"All"}}]})();
+output=[];
+
+macrosGroups.forEach(function(macroGroup,index,array){
+	macroGroup.macros().forEach(function(macro){
+	 //var name=macro.name();
+	 //var id=macro.id();
+	 	if (macro.enabled()){
+		output.push({
+		title:macro.name(),
+		label:macroGroup.name(),
+		subtitle:macro.triggers. description().toString().replace(/The Hot Key | is pressed/g, ""),
+		actionArgument: macro.id(),
+		icon: AppName,
+		action: 'executeMacro',
+		actionRunsInBackground: true,
+		})
+		}
+ })
+ return output;
+   
+});
+//var JSout=Object.assign(output, LBAll);
+//JSout
+//var a=output.push(LBAll)
+var obj=output.concat(LBAll);
+JSout= JSON.stringify(obj, null, 4);
+JSout</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>LB</string>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>670818784.04388702</real>
+				<key>CustomIconData</key>
+				<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+				<key>ModificationDate</key>
+				<real>670818805.57200801</real>
+				<key>Name</key>
+				<string>KMMacro2Text Example</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>Application</key>
+						<dict/>
+						<key>FireType2</key>
+						<string>Activate</string>
+						<key>MacroTriggerType</key>
+						<string>Application</string>
+						<key>RepeatTime</key>
+						<integer>60</integer>
+						<key>Target</key>
+						<string>Front</string>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>BE3C3306-1BF1-4105-A5CF-501C4AF242DD</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>LaunchBar</string>
+		<key>ToggleMacroUID</key>
+		<string>5BFB2387-A207-4662-A8B0-4EAB563A0967</string>
+		<key>UID</key>
+		<string>7F891869-A092-4284-B8E3-AD0DF54DD942</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>569856847.63451505</real>
+		<key>CustomIconData</key>
+		<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>Action</key>
+						<string>CancelSpecificMacro</string>
+						<key>ActionUID</key>
+						<integer>52670</integer>
+						<key>Instance</key>
+						<string>KMAllExcute</string>
+						<key>MacroActionType</key>
+						<string>Cancel</string>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>52671</integer>
+						<key>MacroActionType</key>
+						<string>SetVariableToText</string>
+						<key>Text</key>
+						<string>%ExecutingInstance%</string>
+						<key>Variable</key>
+						<string>KMAllExcute</string>
+					</dict>
+					<dict>
+						<key>ActionName</key>
+						<string>com.stairways.keyboardmaestro.editor</string>
+						<key>ActionUID</key>
+						<integer>52672</integer>
+						<key>DisplayKind</key>
+						<string>Variable</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>ExecuteJavaScriptForAutomation</string>
+						<key>Path</key>
+						<string>~/Nutstore Files/Softsyn/Keyboard Maestro/KMJSFile/LB/KMAll.js</string>
+						<key>Text</key>
+						<string>var km=Application("Keyboard Maestro");
+var kme=Application("Keyboard Maestro Engine");
+km.includeStandardAdditions = true;
+kme.includeStandardAdditions = true;
+var AppName=kme.getvariable("AppName");
+var macrosGroups=km.macroGroups.whose({availableApplicationXml:{ _contains: "All" },enabled:true})();
+//var AllApp=JSON.parse(kme.getvariable("AllApp"));
+var macroGroup;
+//var macrosGroups=km.macroGroups.whose({_or:[{availableApplicationXml:{ _contains: AppName }},{availableApplicationXml:{ _contains:"All"}}]})();
+
+var emojis = [
+	'😄','😃','😀','😊','☺','😉','😍','😘','😚','😗','😙','😜','😝','😛','😳','😁','😔','😌','😒','😞','😣','😢','😂','😭','😪','😥','😰','😅','😓','😩','😫','😨','😱','😠','😡','😤','😖','😆','😋','😷','😎','😴','😵','😲','😟','😦','😧','😈','👿','😮','😬','😐','😕','😯','😶','😇','😏','😑','👲','👳','👮','👷','💂','👶','👦','👧','👨','👩','👴','👵','👱','👼','👸','😺','😸','😻','😽','😼','🙀','😿','😹','😾','👹','👺','🙈','🙉','🙊','💀','👽','💩','🔥','✨','🌟','💫','💥','💢','💦','💧','💤','💨','👂','👀','👃','👅','👄','👍','👎','👌','👊','✊','✌','👋','✋','👐','👆','👇','👉','👈','🙌','🙏','☝','👏','💪','🚶','🏃','💃','👫','👪','👬','👭','💏','💑','👯','🙆','🙅','💁','🙋','💆','💇','💅','👰','🙎','🙍','🙇','🎩','👑','👒','👟','👞','👡','👠','👢','👕','👔','👚','👗','🎽','👖','👘','👙','💼','👜','👝','👛','👓','🎀','🌂','💄','💛','💙','💜','💚','❤','💔','💗','💓','💕','💖','💞','💘','💌','💋','💍','💎','👤','👥','💬','👣','💭','🐶','🐺','🐱','🐭','🐹','🐰','🐸','🐯','🐨','🐻','🐷','🐽','🐮','🐗','🐵','🐒','🐴','🐑','🐘','🐼','🐧','🐦','🐤','🐥','🐣','🐔','🐍','🐢','🐛','🐝','🐜','🐞','🐌','🐙','🐚','🐠','🐟','🐬','🐳','🐋','🐄','🐏','🐀','🐃','🐅','🐇','🐉','🐎','🐐','🐓','🐕','🐖','🐁','🐂','🐲','🐡','🐊','🐫','🐪','🐆','🐈','🐩','🐾','💐','🌸','🌷','🍀','🌹','🌻','🌺','🍁','🍃','🍂','🌿','🌾','🍄','🌵','🌴','🌲','🌳','🌰','🌱','🌼','🌐','🌞','🌝','🌚','🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘','🌜','🌛','🌙','🌍','🌎','🌏','🌋','🌌','🌠','⭐','☀','⛅','☁','⚡','☔','❄','⛄','🌀','🌁','🌈','🌊','🎍','💝','🎎','🎒','🎓','🎏','🎆','🎇','🎐','🎑','🎃','👻','🎅','🎄','🎁','🎋','🎉','🎊','🎈','🎌','🔮','🎥','📷','📹','📼','💿','📀','💽','💾','💻','📱','☎','📞','📟','📠','📡','📺','📻','🔊','🔉','🔈','🔇','🔔','🔕','📢','📣','⏳','⌛','⏰','⌚','🔓','🔒','🔏','🔐','🔑','🔎','💡','🔦','🔆','🔅','🔌','🔋','🔍','🛁','🛀','🚿','🚽','🔧','🔩','🔨','🚪','🚬','💣','🔫','🔪','💊','💉','💰','💴','💵','💷','💶','💳','💸','📲','📧','📥','📤','✉','📩','📨','📯','📫','📪','📬','📭','📮','📦','📝','📄','📃','📑','📊','📜','📋','📅','📆','📇','📁','📂','✂','📌','📎','✒','✏','📏','📐','📕','📗','📘','📙','📓','📔','📒','📚','📖','🔖','📛','🔬','🔭','📰','🎨','🎬','🎤','🎧','🎼','🎵','🎶','🎹','🎻','🎺','🎷','🎸','👾','🎮','🃏','🎴','🀄','🎲','🎯','🏈','🏀','⚽','⚾','🎾','🎱','🏉','🎳','⛳','🚵','🚴','🏁','🏇','🏆','🎿','🏂','🏊','🏄','🎣','☕','🍵','🍶','🍼','🍺','🍻','🍸','🍹','🍷','🍴','🍕','🍔','🍟','🍗','🍖','🍝','🍛','🍤','🍱','🍣','🍥','🍙','🍘','🍚','🍜','🍲','🍢','🍡','🍳','🍞','🍩','🍮','🍦','🍨','🍧','🎂','🍰','🍪','🍫','🍬','🍭','🍯','🍎','🍏','🍊','🍋','🍒','🍇','🍉','🍓','🍑','🍈','🍌','🍐','🍍','🍠','🍆','🍅','🌽','🏠','🏡','🏫','🏢','🏣','🏥','🏦','🏪','🏩','🏨','💒','⛪','🏬','🏤','🌇','🌆','🏯','🏰','⛺','🏭','🗼','🗾','🗻','🌄','🌅','🌃','🗽','🌉','🎠','🎡','⛲','🎢','🚢','⛵','🚤','🚣','⚓','🚀','✈','💺','🚁','🚂','🚊','🚉','🚞','🚆','🚄','🚅','🚈','🚇','🚝','🚋','🚃','🚎','🚌','🚍','🚙','🚘','🚗','🚕','🚖','🚛','🚚','🚨','🚓','🚔','🚒','🚑','🚐','🚲','🚡','🚟','🚠','🚜','💈','🚏','🎫','🚦','🚥','⚠','🚧','🔰','⛽','🏮','🎰','♨','🗿','🎪','🎭','🈺','🈶','🈚','🚻','🚹','🚺','🚼','🚾','🚰','🚮','🅿','♿','🚭','🈷','🈸','🈂','Ⓜ','🛂','🛄','🛅','🛃','🉑','㊙','㊗','🆑','🆘','🆔','🚫','🔞','📵','🚯','🚱','🚳','🚷','🚸','⛔','✳','❇','❎','✅','✴','💟','🆚','📳','📴','🅰','🅱','🆎','🅾','💠','⛎','🔯','🏧','💹','💲','💱','©','®','™','〽','〰','🔝','🔚','🔙','🔛','🔜','❌','⭕','❗','❓','❕','❔','🔃','🕛','🕧','🕐','🕜','🕑','🕝','🕒','🕞','🕓','🕟','🕔','🕠','🕕','🕖','🕗','🕘','🕙','🕚','🕡','🕢','🕣','🕤','🕥','🕦','✖','➕','➖','➗','♠','♥','♣','♦','💮','💯','✔','☑','🔘','🔗','➰','🔱','🔲','🔳','◼','◻','◾','◽','▪','▫','🔺','⬜','⬛','⚫','⚪','🔴','🔵','🔻','🔶','🔷','🔸','🔹'
+];
+
+emojiRandom = function(){
+  return emojis[Math.floor(Math.random() * emojis.length)];
+};
+
+
+output=[];
+
+macrosGroups.forEach(function(macroGroup,index,array){
+	var groupName=macroGroup.name();
+    var icon;
+    switch (true) {
+        case /Text|字|标点|统计/.test(groupName):
+            icon='com.apple.TextEdit';
+            break;
+        case /图片/.test(groupName):
+            icon='com.apple.Photos'
+            break;
+
+        case /Clipboard/.test(groupName):
+            icon='📋';
+            break;
+        case /FinderFiles/.test(groupName):
+            icon='🗄';
+            break;
+        case /App/.test(groupName):
+            icon='com.apple.AppStore';
+            break;
+        case /Finder|文件夹/.test(groupName):
+            icon='com.apple.Finder';
+            break;
+        case /DEVON/.test(groupName):
+            icon='com.devon-technologies.think3';
+            break;
+        case /LaunchBar/.test(groupName):
+            icon='at.obdev.LaunchBar';
+            break; 
+        case /Test/.test(groupName):
+            icon='🧭';
+            break;            
+        default:
+            icon="👽";
+            break;
+    }
+    
+    
+    macroGroup.macros().forEach(function(macro){
+	 var name=macro.name();
+     
+	 //var id=macro.id();
+	 	if (macro.enabled()){
+            try {
+                var fristActionName=macro.actions[0].name();
+                if (/(\w*\.)+\w*/.test(fristActionName)) {
+                    icon= fristActionName;
+                 } ;
+            }
+            catch(err) {
+                //document.getElementById("demo").innerHTML = err.message;
+            }
+
+
+            
+		output.push({
+		title:name,
+		label:macroGroup.name(),
+		subtitle:macro.triggers. description().toString().replace(/The Hot Key | is pressed/g, ""),
+		actionArgument: macro.id(),
+		icon:icon,
+		//iconFont: 'STSongti SC Regular',
+		action: 'executeMacro',
+		actionRunsInBackground: true,
+		})
+		}
+ })
+ return output;
+   
+});
+//output
+// var obj=output.concat(AllApp);
+// JSout= JSON.stringify(obj, null, 4);
+JSout= JSON.stringify(output, null, 4)</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+						<key>Variable</key>
+						<string>LBAll</string>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>670818477.98013103</real>
+				<key>CustomIconData</key>
+				<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+				<key>ModificationDate</key>
+				<real>670818940.49487197</real>
+				<key>Name</key>
+				<string>KM(All) Example</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>Application</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.stairways.keyboardmaestro.editor</string>
+							<key>Name</key>
+							<string>Keyboard Maestro</string>
+							<key>NewFile</key>
+							<string>/Applications/Keyboard Maestro.app</string>
+						</dict>
+						<key>FireType2</key>
+						<string>Deactivate</string>
+						<key>MacroTriggerType</key>
+						<string>Application</string>
+						<key>RepeatTime</key>
+						<integer>60</integer>
+						<key>Target</key>
+						<string>Specific</string>
+					</dict>
+					<dict>
+						<key>Application</key>
+						<dict>
+							<key>BundleIdentifier</key>
+							<string>com.stairways.keyboardmaestro.editor</string>
+							<key>Name</key>
+							<string>Keyboard Maestro</string>
+							<key>NewFile</key>
+							<string>/Applications/Keyboard Maestro.app</string>
+						</dict>
+						<key>FireType2</key>
+						<string>Activate</string>
+						<key>MacroTriggerType</key>
+						<string>Application</string>
+						<key>RepeatTime</key>
+						<integer>60</integer>
+						<key>Target</key>
+						<string>Specific</string>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>4CBE8144-B28A-44DB-96BF-2B1453633857</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>LaunchBar</string>
+		<key>ToggleMacroUID</key>
+		<string>5BFB2387-A207-4662-A8B0-4EAB563A0967</string>
+		<key>UID</key>
+		<string>7F891869-A092-4284-B8E3-AD0DF54DD942</string>
+	</dict>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>569856847.63451505</real>
+		<key>CustomIconData</key>
+		<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>ActionUID</key>
+						<integer>53053</integer>
+						<key>Conditions</key>
+						<dict>
+							<key>ConditionList</key>
+							<array>
+								<dict>
+									<key>Application</key>
+									<dict>
+										<key>BundleIdentifier</key>
+										<string>at.obdev.LaunchBar</string>
+										<key>Name</key>
+										<string>LaunchBar</string>
+										<key>NewFile</key>
+										<string>/Applications/LaunchBar.app</string>
+									</dict>
+									<key>ApplicationConditionType</key>
+									<string>NotRunning</string>
+									<key>ConditionType</key>
+									<string>Application</string>
+								</dict>
+							</array>
+							<key>ConditionListMatch</key>
+							<string>All</string>
+						</dict>
+						<key>ElseActions</key>
+						<array/>
+						<key>MacroActionType</key>
+						<string>IfThenElse</string>
+						<key>ThenActions</key>
+						<array>
+							<dict>
+								<key>ActionUID</key>
+								<integer>53054</integer>
+								<key>AllWindows</key>
+								<true/>
+								<key>AlreadyActivatedActionType</key>
+								<string>Normal</string>
+								<key>Application</key>
+								<dict>
+									<key>BundleIdentifier</key>
+									<string>at.obdev.LaunchBar</string>
+									<key>Name</key>
+									<string>LaunchBar</string>
+									<key>NewFile</key>
+									<string>/Applications/LaunchBar.app</string>
+								</dict>
+								<key>MacroActionType</key>
+								<string>ActivateApplication</string>
+								<key>ReopenWindows</key>
+								<true/>
+								<key>TimeOutAbortsMacro</key>
+								<true/>
+							</dict>
+							<dict>
+								<key>ActionUID</key>
+								<integer>53055</integer>
+								<key>MacroActionType</key>
+								<string>Pause</string>
+								<key>Time</key>
+								<string>3</string>
+								<key>TimeOutAbortsMacro</key>
+								<true/>
+							</dict>
+						</array>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>745</integer>
+						<key>DisplayKind</key>
+						<string>Window</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>ExecuteJavaScriptForAutomation</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>	var app = Application('Launchbar');	app.includeStandardAdditions = true;		var km=Application("Keyboard Maestro");	var kme=Application("Keyboard Maestro Engine");	km.includeStandardAdditions = true;	kme.includeStandardAdditions = true;	var LB=kme.getvariable("LB");	var app = Application('Launchbar');	app.includeStandardAdditions = true;	app.performAction ("KMMacros",{withString:LB});	//app.remainActive();</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>644603975.81878805</real>
+				<key>CustomIconData</key>
+				<string>KMEP-GenericApplication-/Applications/LaunchBar.app</string>
+				<key>ModificationDate</key>
+				<real>670823911.11812103</real>
+				<key>Name</key>
+				<string>KM to Active LaunchBar</string>
+				<key>Triggers</key>
+				<array/>
+				<key>UID</key>
+				<string>41CE5AA9-3DF9-4A02-A2C2-502FEC226145</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>LaunchBar</string>
+		<key>ToggleMacroUID</key>
+		<string>5BFB2387-A207-4662-A8B0-4EAB563A0967</string>
+		<key>UID</key>
+		<string>7F891869-A092-4284-B8E3-AD0DF54DD942</string>
+	</dict>
+</array>
+</plist>
